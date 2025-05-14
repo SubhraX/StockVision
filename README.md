@@ -109,7 +109,7 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 ## 📜 License
 
-MIT License © [SubhraX](https://github.com/SubhraX)
+Apache License © [SubhraX](https://github.com/SubhraX)
 
 ---
 
