@@ -1,8 +1,3 @@
-Absolutely! Here's a **well-designed, user-friendly `README.md`** for your `StockVision` project — assuming it's a stock price prediction app using ML models (TensorFlow/Sklearn), possibly FastAPI, and has large models managed via Git LFS:
-
----
-
-````md
 # 📈 StockVision
 
 > A powerful, modern stock market prediction app built with machine learning and deep learning. Predict future stock prices using historical data and technical indicators — all wrapped in an easy-to-use web interface.
@@ -11,7 +6,7 @@ Absolutely! Here's a **well-designed, user-friendly `README.md`** for your `Stoc
 
 ## 🚀 Features
 
-- 🔮 BiLSTM-based deep learning models for price prediction
+- 🔮 LSTM-based deep learning models for price prediction
 - 🧠 Scikit-learn preprocessing (e.g., MinMaxScaler)
 - 📊 Interactive web interface using FastAPI + Uvicorn
 - 💾 Large model files managed via Git LFS
@@ -35,7 +30,7 @@ Absolutely! Here's a **well-designed, user-friendly `README.md`** for your `Stoc
    cd StockVision
    git lfs install
    git lfs pull
-````
+
 
 2. **Create a virtual environment**:
 
