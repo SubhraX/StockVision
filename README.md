@@ -124,17 +124,5 @@ MIT License © [SubhraX](https://github.com/SubhraX)
 
 ## 📬 Questions?
 
-Open an issue or email me directly at `your-email@example.com`.
+Open an issue or email me directly at `subhrasamanta.ss10@gmail.com`.
 
-```
-
----
-
-Let me know if you'd like me to:
-- Add badges (build, license, python version)
-- Make it multilingual
-- Include GIFs/screenshots for visual appeal
-- Write `Dockerfile` / deployment guide
-
-Want me to save this to your repo as a `README.md` file automatically?
-```
