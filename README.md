@@ -6,7 +6,7 @@
 
 ## 🚀 Features
 
-- 🔮 LSTM-based deep learning models for price prediction
+- 🔮 BiLSTM-based deep learning models for price prediction
 - 🧠 Scikit-learn preprocessing (e.g., MinMaxScaler)
 - 📊 Interactive web interface using FastAPI + Uvicorn
 - 💾 Large model files managed via Git LFS
