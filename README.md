@@ -1,190 +1,105 @@
 
-# 📈 StockVision
+# StockVision
 
-StockVision is a full-stack stock prediction web app built with **React** (frontend) and **FastAPI** (backend). It allows users to view stock charts and receive predictions via a machine learning model.
+StockVision is a full-stack stock price prediction application that uses a FastAPI backend with an LSTM-based machine learning model and a React frontend for data visualization.
 
 ---
 
-## 📁 Project Structure
+## 🚀 Features
+
+- Predicts future stock prices for any given ticker symbol (e.g., AAPL, TSLA, etc.)
+- Uses historical stock data from Yahoo Finance (via yfinance)
+- Implements a Bidirectional LSTM model using TensorFlow/Keras
+- Frontend visualizes both actual and predicted stock prices using Chart.js with zoom and pan support
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- FastAPI
+- yfinance
+- NumPy, Scikit-learn
+- TensorFlow/Keras
+
+### Frontend
+- React.js
+- Chart.js with zoom plugin
+- JavaScript/JSX
+
+---
+
+## 🧪 Project Structure
 
 ```
 StockVision/
-│
-├── stock-frontend/           # React frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── App.js
-│   │   ├── StockChart.js
-│   │   └── ...
-│   ├── package.json
-│   └── ...
-│
-└── stock-predictor-app/      # FastAPI backend
-    ├── main.py
-    ├── venv/
-    └── ...
+├── stock-frontend/          # React frontend
+│   └── src/
+│       └── StockChart.js    # Chart component fetching backend predictions
+├── stock-predictor-app/     # FastAPI backend
+│   ├── main.py              # ML model + API
+│   └── venv/                # Python virtual environment
 ```
 
 ---
 
-## ⚙️ Prerequisites
+## 🖥️ Getting Started
 
-Before running the app, ensure the following are installed:
+### Backend (FastAPI)
 
-- [Node.js](https://nodejs.org/) (v14+)
-- [Python](https://www.python.org/) (v3.8+)
-- [Git](https://git-scm.com/)
-
----
-
-## 🚀 Getting Started
-
-You'll need **two terminals** open to run both the frontend and backend servers.
-
----
-
-### 🟡 1. Backend Setup (FastAPI)
-
-#### Navigate to the backend folder:
-```powershell
+1. **Navigate to backend directory**:
+```bash
 cd stock-predictor-app
 ```
 
-#### Create and activate a virtual environment:
+2. **Activate virtual environment (PowerShell)**:
 ```powershell
-python -m venv venv
-venv\Scripts\Activate.ps1   # Use `source venv/bin/activate` on Linux/macOS
+venv\Scripts\Activate.ps1
 ```
 
-#### Install dependencies:
-```powershell
-pip install fastapi uvicorn numpy pandas scikit-learn
-```
-
-#### (Optional) Install CORS middleware if using frontend:
-```powershell
-pip install fastapi[all]
-```
-
-#### Run the backend server:
-```powershell
+3. **Run the backend server**:
+```bash
 uvicorn main:app --reload
 ```
 
-This starts the API at: [http://localhost:8000](http://localhost:8000)
+> The API will be live at `http://127.0.0.1:8000`
 
 ---
 
-### 🔵 2. Frontend Setup (React)
+### Frontend (React)
 
-#### Navigate to the frontend folder:
-```powershell
+1. **Navigate to frontend directory**:
+```bash
 cd stock-frontend
 ```
 
-#### Install Node.js dependencies:
-```powershell
+2. **Install dependencies**:
+```bash
 npm install
 ```
 
-#### Start the development server:
-```powershell
+3. **Start the development server**:
+```bash
 npm start
 ```
 
-This starts the frontend at: [http://localhost:3000](http://localhost:3000)
+> The app will run at `http://localhost:3000`
 
 ---
 
-## 🔁 How It Works
+## 🔍 Example Usage
 
-1. User opens the frontend React interface.
-2. Enters a stock symbol or relevant input.
-3. The React app sends a `POST` request to the FastAPI backend.
-4. The backend processes the input and returns predictions.
-5. The frontend displays prediction results and/or visual charts.
-
----
-
-## 📦 Example API (FastAPI)
-
-In `main.py`:
-```python
-from fastapi import FastAPI
-from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
-
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # You can restrict to http://localhost:3000
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-class StockInput(BaseModel):
-    symbol: str
-
-@app.post("/predict")
-def predict(input: StockInput):
-    # Placeholder logic for stock prediction
-    return {"symbol": input.symbol, "prediction": "up"}
-```
-
----
-
-## 📈 Example Frontend Usage (React)
-
-In `StockChart.js` or similar:
-```javascript
-fetch("http://localhost:8000/predict", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ symbol: "AAPL" })
-})
-.then(res => res.json())
-.then(data => {
-  console.log("Prediction:", data.prediction);
-});
-```
-
----
-
-## 🧪 Running Tests
-
-- Frontend:
-  ```bash
-  npm test
-  ```
-
-- Backend:
-  Add test cases using `pytest` or `unittest` and run:
-  ```bash
-  pytest
-  ```
+Visit the frontend app and enter a stock ticker (e.g., `AAPL`) to view predictions. The backend fetches the last 100 days of data, trains a model on it, and forecasts the next 30 days.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License. See `LICENSE` for more details.
+Apache-2.0 License
 
 ---
 
-## 🙋‍♂️ Contributors
+## 📫 Contact
 
-- You!
+For any questions or suggestions, please open an issue or contribute to this repository.
 
----
-
-## 🧠 Future Improvements
-
-- Integrate real-time stock data
-- Improve ML model accuracy
-- Deploy to the cloud (e.g., Render, Vercel)
-
----
