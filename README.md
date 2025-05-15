@@ -1,128 +1,190 @@
+
 # 📈 StockVision
 
-> A powerful, modern stock market prediction app built with machine learning and deep learning. Predict future stock prices using historical data and technical indicators — all wrapped in an easy-to-use web interface.
+StockVision is a full-stack stock prediction web app built with **React** (frontend) and **FastAPI** (backend). It allows users to view stock charts and receive predictions via a machine learning model.
 
 ---
 
-## 🚀 Features
+## 📁 Project Structure
 
-- 🔮 BiLSTM-based deep learning models for price prediction
-- 🧠 Scikit-learn preprocessing (e.g., MinMaxScaler)
-- 📊 Interactive web interface using FastAPI + Uvicorn
-- 💾 Large model files managed via Git LFS
-- ⚙️ Fully local setup — no data leaks
-
----
-
-## 📦 Requirements
-
-- Python 3.10+
-- Git (with LFS enabled)
-- `pip` (or `pipenv` / `poetry`)
-
----
-
-## 🛠️ Installation
-
-1. **Clone the repository** and pull LFS files:
-   ```bash
-   git clone https://github.com/SubhraX/StockVision.git
-   cd StockVision
-   git lfs install
-   git lfs pull
-
-
-2. **Create a virtual environment**:
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate      # On macOS/Linux
-   venv\Scripts\activate         # On Windows
-   ```
-
-3. **Install dependencies**:
-
-   ```bash
-   pip install --upgrade pip
-   pip install -r requirements.txt
-   ```
+```
+StockVision/
+│
+├── stock-frontend/           # React frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── StockChart.js
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+│
+└── stock-predictor-app/      # FastAPI backend
+    ├── main.py
+    ├── venv/
+    └── ...
+```
 
 ---
 
-## 🧠 How It Works
+## ⚙️ Prerequisites
 
-1. Downloads and processes historical stock data
-2. Scales input features using `MinMaxScaler`
-3. Feeds data into an LSTM neural network (TensorFlow)
-4. Outputs predicted prices
-5. Visualizes results through a browser-based UI
+Before running the app, ensure the following are installed:
+
+- [Node.js](https://nodejs.org/) (v14+)
+- [Python](https://www.python.org/) (v3.8+)
+- [Git](https://git-scm.com/)
 
 ---
 
-## 🖥️ Running the App
+## 🚀 Getting Started
 
-Start the local server:
+You'll need **two terminals** open to run both the frontend and backend servers.
 
-```bash
+---
+
+### 🟡 1. Backend Setup (FastAPI)
+
+#### Navigate to the backend folder:
+```powershell
+cd stock-predictor-app
+```
+
+#### Create and activate a virtual environment:
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1   # Use `source venv/bin/activate` on Linux/macOS
+```
+
+#### Install dependencies:
+```powershell
+pip install fastapi uvicorn numpy pandas scikit-learn
+```
+
+#### (Optional) Install CORS middleware if using frontend:
+```powershell
+pip install fastapi[all]
+```
+
+#### Run the backend server:
+```powershell
 uvicorn main:app --reload
 ```
 
-Then visit:
+This starts the API at: [http://localhost:8000](http://localhost:8000)
 
+---
+
+### 🔵 2. Frontend Setup (React)
+
+#### Navigate to the frontend folder:
+```powershell
+cd stock-frontend
 ```
-http://127.0.0.1:8000
+
+#### Install Node.js dependencies:
+```powershell
+npm install
+```
+
+#### Start the development server:
+```powershell
+npm start
+```
+
+This starts the frontend at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🔁 How It Works
+
+1. User opens the frontend React interface.
+2. Enters a stock symbol or relevant input.
+3. The React app sends a `POST` request to the FastAPI backend.
+4. The backend processes the input and returns predictions.
+5. The frontend displays prediction results and/or visual charts.
+
+---
+
+## 📦 Example API (FastAPI)
+
+In `main.py`:
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can restrict to http://localhost:3000
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class StockInput(BaseModel):
+    symbol: str
+
+@app.post("/predict")
+def predict(input: StockInput):
+    # Placeholder logic for stock prediction
+    return {"symbol": input.symbol, "prediction": "up"}
 ```
 
 ---
 
-## 📁 File Structure
+## 📈 Example Frontend Usage (React)
 
-```bash
-StockVision/
-├── main.py                  # FastAPI entrypoint
-├── model/                   # Pretrained ML/DL models (tracked with Git LFS)
-├── data/                    # Input stock data
-├── app/                     # Backend logic (routes, processing)
-├── utils/                   # Helper modules
-├── requirements.txt         # Python dependencies
-└── README.md
+In `StockChart.js` or similar:
+```javascript
+fetch("http://localhost:8000/predict", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ symbol: "AAPL" })
+})
+.then(res => res.json())
+.then(data => {
+  console.log("Prediction:", data.prediction);
+});
 ```
 
 ---
 
-## 🧩 Git LFS Info
+## 🧪 Running Tests
 
-This project uses [Git LFS](https://git-lfs.github.com/) for large model files (e.g., `.h5`, `.pkl`). Make sure you’ve installed and initialized it:
+- Frontend:
+  ```bash
+  npm test
+  ```
 
-```bash
-git lfs install
-git lfs pull
-```
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
+- Backend:
+  Add test cases using `pytest` or `unittest` and run:
+  ```bash
+  pytest
+  ```
 
 ---
 
-## 📜 License
+## 📄 License
 
-Apache License © [SubhraX](https://github.com/SubhraX)
+This project is licensed under the MIT License. See `LICENSE` for more details.
+
+---
+
+## 🙋‍♂️ Contributors
+
+- You!
 
 ---
 
 ## 🧠 Future Improvements
 
-* 📦 Docker support
-* 🔄 Live data refresh from financial APIs
-* 🧪 Unit tests
-* 🌐 Deployment to cloud (Render, Vercel, etc.)
+- Integrate real-time stock data
+- Improve ML model accuracy
+- Deploy to the cloud (e.g., Render, Vercel)
 
 ---
-
-## 📬 Questions?
-
-Open an issue or email me directly at `subhrasamanta.ss10@gmail.com`.
-
