@@ -1,7 +1,7 @@
 
 # StockVision
 
-StockVision is a full-stack stock price prediction application that uses a FastAPI backend with an LSTM-based machine learning model and a React frontend for data visualization.
+StockVision is a full-stack stock price prediction application that uses a FastAPI backend with an BiLSTM-based machine learning model and a React frontend for data visualization.
 
 ---
 
